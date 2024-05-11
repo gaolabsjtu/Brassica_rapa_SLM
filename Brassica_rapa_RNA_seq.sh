@@ -25,9 +25,10 @@ echo "${i}" "${pre_n}" "${aft_n}" "${percentage}"%"" > redup.percentage.txt
 
 samtools index ${i}.q10.MarkD.bam
 bamCoverage -b ${i}.q10.MarkD.bam --normalizeUsing BPM -o ${i}_bamCoverage.test.bdg -of bedgraph
-awk "{print \$1 \"\t.\t${i}\t\"\$2\"\t\"\$3\"\t\" log(\$4+1)/log(2)\"\t.\t.\t.\"}" ${i}_bamCoverage.test.bdg > ${i}.rRNA_removal.w50.rpkm_plus1.log2.gff
+awk "{print \$1 \"\t.\t${i}\t\"\$2\"\t\"\$3\"\t\" log(\$4+1)/log(2)\"\t.\t.\t.\"}" ${i}_bamCoverage.test.bdg > ${i}.W50.gff
+
+samtools sort -@ 20 ${i}.q10.MarkD.bam > ${i}.q10.MarkD.sort.bam
+samtools index ${i}.q10.MarkD.sort.bam
+htseq-count -r pos -f bam -i Parent ${i}.q10.MarkD.sort.bam Brassica_campestris_ssp.chinensis_Cultivar_NHCC001_gene.chr.gtf > ${i}_raw_counts.txt
 
 done
-
-
-
