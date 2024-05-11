@@ -28,7 +28,7 @@ perl -S ~/window_by_annotation_mc.pl -g ${n}.w50.anno.gff -k -t 'ID' -o anno/${w
 perl -S ~/window_by_annotation_mc.pl -g ${n}.w50.anno.gff -k -t 'ID' -o anno/${ref}_${i}.gff ${ctrl}.bsmap_r_u.${i}.W1.meth.5count.gff
 done
 
-#cacule all_C p-value and filte
+#caculate all_C p-value and filte
 perl -S ~/gff_mashup.pl -k -c 'c,t' -o ${n}.w50.txt anno/${test}_*.gff anno/${ctrl}_*.gff
 perl -S ~/fisher_exact_test.pl -a 3 -b 4 -c 11 -d 12 -i ${n}.w50.txt -o ${n}.fisher_result.txt
 awk -v OFS='\t' '{$20 = (($7+$8) != 0) ? sprintf("%.5f", $7 / ($7+$8)) : "Na"}1' ${n}.fisher_result.txt |sed -e '1s/Na/Test_CHG/' > data.txt
