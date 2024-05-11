@@ -20,7 +20,7 @@ bedtools merge -d 100 -i ${n}.w50_for_fisher.bed > ${n}.merged100.bed
 awk '{if ($3-$2>=100 ) print $0}' ${n}.merged100.bed > ${n}.merged100.over100.bed
 awk '{print $1"\t.\t.\t"$2"\t"$3"\t.\t.\t.\tID="NR}' ${n}.merged100.over100.bed > ${n}.merged100.over100.anno.gff
 
-#annotation new window
+#annotate new window
 mkdir anno
 for i in CG CHG CHH allC
 do
