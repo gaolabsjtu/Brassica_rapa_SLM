@@ -1,14 +1,13 @@
 #!/bin/bash
-projPath="NHCC001/TE_annotation/"
-
-TE_to_be_analyzed="Brapa_NHCC_TE"
 Gene_to_be_analyzed="Brapa_NHCC_genes"
+TE_to_be_analyzed="Brapa_NHCC_TE"
 data_set="sample_name"
 
-TE_ends="${data_set}_5count_${TE_to_be_analyzed}"
 gene_ends="${data_set}_5count_${Gene_to_be_analyzed}"
-mkdir -p ./${TE_ends}
+TE_ends="${data_set}_5count_${TE_to_be_analyzed}"
 mkdir -p ./${gene_ends}
+mkdir -p ./${TE_ends}
+
 
 for i in CG CHG CHH
 
@@ -31,7 +30,7 @@ for j in *ends
 do 
 perl -S /data_raid_disk/Gaolab_group_data/bin/average_ends_new.pl -s 100 -w 100 $j > $j.avg
 done
-
+cd ..
 cd ./${TE_ends}
 for k in *ends
 do
